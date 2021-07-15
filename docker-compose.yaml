@@ -6,7 +6,7 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
-      - /home/apptiva/nextcloud/volumes/db:/var/lib/mysql
+      - /media/WDElements/Nextcloud-mariadb:/var/lib/mysql
     networks:
       - default
     env_file:
@@ -23,7 +23,7 @@ services:
       - default
       - proxy-tier
     volumes:
-      - /home/apptiva/nextcloud/volumes/nextcloud:/var/www/html
+      - /media/WDElements/Nextcloud:/var/www/html
     environment:
       - MYSQL_HOST=db
     depends_on:
