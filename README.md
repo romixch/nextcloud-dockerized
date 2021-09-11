@@ -17,3 +17,6 @@ Z.B. so:
 ```
 0 3 * * * cd nextcloud-dockerized && ./dump_db.sh > /home/roman/nextcloud-dockerized/dump-db.log 2>&1
 ```
+
+Nun liegt immer ein file `db-dump.sql.gz` im lokalen Verzeichnis, das du dann sichern kannst.
+
