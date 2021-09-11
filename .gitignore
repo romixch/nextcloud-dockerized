@@ -1,3 +1,5 @@
 /volumes
 /db.env
 /letsencrypt.env
+/*.log
+/*.sql.gz
