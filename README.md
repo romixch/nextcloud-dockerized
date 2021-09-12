@@ -20,3 +20,40 @@ Z.B. so:
 
 Nun liegt immer ein file `db-dump.sql.gz` im lokalen Verzeichnis, das du dann sichern kannst.
 
+## Upgrade
+Um die neusten Sicherheitsupdates und -Features zu bekommen, sollten wir immer die neuste Nextcloud-Version
+einsetzen. Mit Docker ist das ganz einfach. Offiziell ist das hier dokumentiert: (https://github.com/docker-library/docs/blob/master/nextcloud/README.md#update-to-a-newer-version)
+
+Zusammengefasst bedeutet das folgendes:
+
+1. In docker-compose.yaml die Version von Nextcloud aktualisieren
+2. `docker-compose pull`
+3. `docker-compose down`
+4. `docker-compose up -d`
+
+Nach dem Upgrade schaue ich jeweils ins Log rein: `docker-compose logs -f app`. Der Startup des Servers kann schon ein paar 
+Minuten dauern. Ein normales Log schaut etwa so aus:
+
+```
+app_1                    | Initializing finished
+app_1                    | Nextcloud or one of the apps require upgrade - only a limited number of commands are available
+app_1                    | You may use your browser or the occ upgrade command to do the upgrade
+app_1                    | Setting log level to debug
+app_1                    | Turned on maintenance mode
+app_1                    | Updating database schema
+app_1                    | Updated database
+app_1                    | Checking for update of app activity in appstore
+app_1                    | Checked for update of app "activity" in appstore
+app_1                    | Checking for update of app oauth2 in appstore
+app_1                    | Checked for update of app "oauth2" in appstore
+app_1                    | Checking for update of app password_policy in appstore
+app_1                    | Checked for update of app "password_policy" in appstore
+...
+app_1                    | Starting code integrity check...
+app_1                    | Finished code integrity check
+app_1                    | Update successful
+app_1                    | Turned off maintenance mode
+app_1                    | Resetting log level
+```
+
+Du hast nun nextcloud erfolgreich auf die neue Version aktualisiert.
