@@ -4,7 +4,7 @@ services:
   db:
     image: mariadb
     restart: always
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb_read_only_compressed=OFF
     volumes:
       - /media/WDElements/Nextcloud-mariadb:/var/lib/mysql
     networks:
@@ -13,7 +13,7 @@ services:
       - db.env
 
   app:
-    image: nextcloud:21
+    image: nextcloud:22
     restart: always
     ports:
       - 8080:80
