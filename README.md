@@ -57,3 +57,7 @@ app_1                    | Resetting log level
 ```
 
 Du hast nun nextcloud erfolgreich auf die neue Version aktualisiert.
+
+## MariaDB-Version
+Bevor du die Version von MariaDB aktualisierst, bitte hier zuerst kontrollieren, ob diese Version auch von Nextcloud unterstützt wird:
+(https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html)
