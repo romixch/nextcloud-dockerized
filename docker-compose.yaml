@@ -15,7 +15,7 @@ services:
     mem_limit: 512m
 
   app:
-    image: nextcloud:22
+    image: nextcloud:24
     restart: always
     ports:
       - 8080:80
@@ -34,7 +34,7 @@ services:
       - db.env
       - letsencrypt.env
     cpus: 2.0
-    mem_limit: 512m
+    mem_limit: 1024m
 
   proxy:
     build: ./proxy
