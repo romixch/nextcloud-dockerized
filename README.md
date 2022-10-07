@@ -28,8 +28,7 @@ Zusammengefasst bedeutet das folgendes:
 
 1. In docker-compose.yaml die Version von Nextcloud aktualisieren
 2. `docker-compose pull`
-3. `docker-compose down`
-4. `docker-compose up -d`
+3. `docker-compose up -d`
 
 Nach dem Upgrade schaue ich jeweils ins Log rein: `docker-compose logs -f app`. Der Startup des Servers kann schon ein paar 
 Minuten dauern. Ein normales Log schaut etwa so aus:
