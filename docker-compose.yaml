@@ -4,7 +4,7 @@ services:
   db:
     image: mariadb:10.6
     restart: always
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb_read_only_compressed=OFF
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb_read_only_compressed=OFF --max-statement-time=180
     volumes:
       - /media/WDElements/Nextcloud-mariadb:/var/lib/mysql
     networks:
@@ -34,7 +34,7 @@ services:
       - db.env
       - letsencrypt.env
     cpus: 2.0
-    mem_limit: 1024m
+    mem_limit: 1536m
 
   proxy:
     build: ./proxy
