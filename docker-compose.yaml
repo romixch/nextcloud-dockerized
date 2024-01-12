@@ -3,8 +3,6 @@ version: "2.2"
 services:
   db:
     image: mariadb:10.6
-    profiles:
-      - core
     restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb_read_only_compressed=OFF --max-statement-time=180
     volumes:
@@ -18,8 +16,6 @@ services:
 
   app:
     image: nextcloud:27
-    profiles:
-      - core
     restart: always
     ports:
       - 8080:80
