@@ -3,7 +3,8 @@ version: "2.2"
 services:
   db:
     image: mariadb:10.6
-    profile: core
+    profiles:
+      - core
     restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb_read_only_compressed=OFF --max-statement-time=180
     volumes:
@@ -17,7 +18,8 @@ services:
 
   app:
     image: nextcloud:27
-    profile: core
+    profiles:
+      - core
     restart: always
     ports:
       - 8080:80
@@ -46,7 +48,8 @@ services:
 
   proxy:
     build: ./proxy
-    profile: proxy
+    profiles:
+      - proxy
     restart: always
     ports:
       - 80:80
@@ -61,7 +64,8 @@ services:
 
   letsencrypt-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
-    profile: proxy
+    profiles:
+      - proxy
     restart: always
     volumes:
       - certs:/etc/nginx/certs
