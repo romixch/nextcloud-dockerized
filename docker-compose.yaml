@@ -3,6 +3,7 @@ version: "2.2"
 services:
   db:
     image: mariadb:10.6
+    profile: core
     restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb_read_only_compressed=OFF --max-statement-time=180
     volumes:
@@ -16,6 +17,7 @@ services:
 
   app:
     image: nextcloud:27
+    profile: core
     restart: always
     ports:
       - 8080:80
@@ -24,6 +26,7 @@ services:
     networks:
       - default
       - proxy-tier
+      - traefik_default
     volumes:
       - /media/WDElements/Nextcloud:/var/www/html
     environment:
@@ -35,9 +38,15 @@ services:
       - letsencrypt.env
     cpus: 2.0
     mem_limit: 1536m
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.romix.ch`)"
+      - "traefik.http.routers.nextcloud.entrypoints=websecure"
+      - "traefik.http.routers.nextcloud.tls.certresolver=letsencrypt"
 
   proxy:
     build: ./proxy
+    profile: proxy
     restart: always
     ports:
       - 80:80
@@ -52,6 +61,7 @@ services:
 
   letsencrypt-companion:
     image: jrcs/letsencrypt-nginx-proxy-companion
+    profile: proxy
     restart: always
     volumes:
       - certs:/etc/nginx/certs
@@ -74,3 +84,5 @@ volumes:
 
 networks:
   proxy-tier:
+  traefik_default:
+    external: true
