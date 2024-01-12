@@ -27,7 +27,6 @@ services:
       - 80
     networks:
       - default
-      - proxy-tier
       - traefik_default
     volumes:
       - /media/WDElements/Nextcloud:/var/www/html
@@ -37,7 +36,6 @@ services:
       - db
     env_file:
       - db.env
-      - letsencrypt.env
     cpus: 2.0
     mem_limit: 1536m
     labels:
@@ -46,47 +44,6 @@ services:
       - "traefik.http.routers.nextcloud.entrypoints=websecure"
       - "traefik.http.routers.nextcloud.tls.certresolver=letsencrypt"
 
-  proxy:
-    build: ./proxy
-    profiles:
-      - proxy
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - certs:/etc/nginx/certs:ro
-      - vhost.d:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-      - proxy-tier
-
-  letsencrypt-companion:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    profiles:
-      - proxy
-    restart: always
-    volumes:
-      - certs:/etc/nginx/certs
-      - vhost.d:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    volumes_from:
-      - proxy
-    networks:
-      - proxy-tier
-    depends_on:
-      - proxy
-    environment:
-      - DEFAULT_EMAIL=roman.schaller@gmail.com
-
-volumes:
-  certs:
-  vhost.d:
-  html:
-
 networks:
-  proxy-tier:
   traefik_default:
     external: true
