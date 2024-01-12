@@ -1,5 +1,6 @@
 # nextcloud-dockerized
-Nextcloud mit docker-compose betreiben
+
+Nextcloud mit docker compose betreiben
 
 Diese paar Files benutze ich um meine Nextcloud Installation zu betreiben. Und so funktioniert es auch bei dir:
 
@@ -7,9 +8,10 @@ Diese paar Files benutze ich um meine Nextcloud Installation zu betreiben. Und s
 2. Kopiere `db.env.template` nach `db.env`
 3. Kopiere `letsencrypt.env.template` nach `letsencrypt.env`
 4. Setze die Variablen in der Datei `db.env` und `letsencrypt.env`
-5. Starte das Ganze mit `docker-compose up`
+5. Starte das Ganze mit `docker compose up`
 
 ## Backup
+
 Die MariaDB und die Files sollten regelmässig gesichert werden. Bevor die MariaDB gesichert werden kann, muss
 man einen Dump davon erstellen. Das tue ich mit dem Skript `dump-db.sh`, welches ich mit einem Cron Job ausführe.
 Z.B. so:
@@ -21,16 +23,17 @@ Z.B. so:
 Nun liegt immer ein file `db-dump.sql.gz` im lokalen Verzeichnis, das du dann sichern kannst.
 
 ## Upgrade
+
 Um die neusten Sicherheitsupdates und -Features zu bekommen, sollten wir immer die neuste Nextcloud-Version
 einsetzen. Mit Docker ist das ganz einfach. Offiziell ist das hier dokumentiert: (https://github.com/docker-library/docs/blob/master/nextcloud/README.md#update-to-a-newer-version)
 
 Zusammengefasst bedeutet das folgendes:
 
-1. In docker-compose.yaml die Version von Nextcloud aktualisieren
-2. `docker-compose pull`
-3. `docker-compose up -d`
+1. In docker compose.yaml die Version von Nextcloud aktualisieren
+2. `docker compose pull`
+3. `docker compose up -d`
 
-Nach dem Upgrade schaue ich jeweils ins Log rein: `docker-compose logs -f app`. Der Startup des Servers kann schon ein paar 
+Nach dem Upgrade schaue ich jeweils ins Log rein: `docker compose logs -f app`. Der Startup des Servers kann schon ein paar
 Minuten dauern. Ein normales Log schaut etwa so aus:
 
 ```
@@ -58,5 +61,6 @@ app_1                    | Resetting log level
 Du hast nun nextcloud erfolgreich auf die neue Version aktualisiert.
 
 ## MariaDB-Version
+
 Bevor du die Version von MariaDB aktualisierst, bitte hier zuerst kontrollieren, ob diese Version auch von Nextcloud unterstützt wird:
 (https://docs.nextcloud.com/server/latest/admin_manual/installation/system_requirements.html)
