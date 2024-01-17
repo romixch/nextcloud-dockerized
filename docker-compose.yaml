@@ -15,7 +15,7 @@ services:
     mem_limit: 512m
 
   app:
-    image: nextcloud:27
+    image: nextcloud:28
     restart: always
     ports:
       - 8080:80
