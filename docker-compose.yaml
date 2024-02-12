@@ -6,7 +6,7 @@ services:
     restart: always
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb_read_only_compressed=OFF --max-statement-time=180
     volumes:
-      - /media/WDElements/Nextcloud-mariadb:/var/lib/mysql
+      - /media/data/Nextcloud-mariadb:/var/lib/mysql
     networks:
       - default
     env_file:
@@ -25,7 +25,7 @@ services:
       - default
       - traefik_default
     volumes:
-      - /media/WDElements/Nextcloud:/var/www/html
+      - /media/data/Nextcloud:/var/www/html
     environment:
       - MYSQL_HOST=db
     depends_on:
