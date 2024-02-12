@@ -39,7 +39,7 @@ services:
       - "traefik.http.routers.nextcloud.rule=Host(`nextcloud.romix.ch`)"
       - "traefik.http.routers.nextcloud.entrypoints=websecure"
       - "traefik.http.routers.nextcloud.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.nextcloud.middlewares=nextcloud_redirectregex"
+      - "traefik.http.routers.nextcloud.middlewares=nextcloud_redirectregex,GeoBlock-Strict@file"
       - "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.permanent=true"
       - "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex=`https://(.*)/.well-known/(?:card|cal)dav`"
       - "traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement=`https://$${1}/remote.php/dav`"
